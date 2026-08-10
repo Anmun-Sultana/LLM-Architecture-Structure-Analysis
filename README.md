@@ -1,44 +1,52 @@
-# LLM-Architecture-Structure-Analysis
-cse423 project
 # LLM Architecture Structure Analysis
 
 ## CSE423 Project
 
 This repository contains selected source files from two open-source GitHub projects for software architecture and structure analysis.
 
+---
+
 ## Selected Projects
 
 ### 1. Spring PetClinic
 
-Spring PetClinic is a sample Spring Boot application demonstrating a veterinary clinic management system.
+Spring PetClinic is a sample Spring Boot application that demonstrates a veterinary clinic management system.
 
-**Original Repository:**  
+**Original GitHub Repository:**
+
 https://github.com/spring-projects/spring-petclinic
 
 **Selected Files:** 10
 
-The selected files are stored in the `Spring-PetClinic` folder.
+The selected Spring PetClinic files are available in the following folder:
 
-[View Spring PetClinic Selected Files](./Spring-PetClinic)
+[Spring PetClinic Selected Files](./Spring-PetClinic)
 
-[View Spring PetClinic File Descriptions](./Spring-PetClinic/descriptions.md)
+The descriptions of the selected files are available here:
 
+[Spring PetClinic File Descriptions](./Spring-PetClinic/descriptions.md)
+
+---
 
 ### 2. Broadleaf Commerce
 
 Broadleaf Commerce is an open-source Java-based e-commerce platform/framework.
 
-**Original Repository:**  
+**Original GitHub Repository:**
+
 https://github.com/BroadleafCommerce/BroadleafCommerce
 
 **Selected Files:** 4
 
-The selected files are stored in the `Broadleaf-Commerce` folder.
+The selected Broadleaf Commerce files are available in the following folder:
 
-[View Broadleaf Commerce Selected Files](./Broadleaf-Commerce)
+[Broadleaf Commerce Selected Files](./Broadleaf-Commerce)
 
-[View Broadleaf Commerce File Descriptions](./Broadleaf-Commerce/descriptions.md)
+The descriptions of the selected files are available here:
 
+[Broadleaf Commerce File Descriptions](./Broadleaf-Commerce/descriptions.md)
+
+---
 
 ## Repository Structure
 
