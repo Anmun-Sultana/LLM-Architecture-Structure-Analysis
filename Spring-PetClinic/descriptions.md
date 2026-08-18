@@ -25,9 +25,8 @@ The class generally follows **SRP** because it is responsible for handling owner
 
 ### Code Smell Analysis
 
-**Duplicated Code:** Owner lookup and owner-not-found handling are repeated in other controllers, particularly `PetController` and `VisitController`. The same `findById()` and exception-handling pattern appears in multiple places.
 
-**Mild Long Method concern:** `processFindForm()` performs several tasks in one method: normalizing the search input, performing the search, handling zero results, handling one result, and preparing the response for multiple results. It is not an extreme Long Method, but its responsibilities could be separated further.
+** Long Method concern:** `processFindForm()` performs several tasks in one method: normalizing the search input, performing the search, handling zero results, handling one result, and preparing the response for multiple results. It is not an extreme Long Method, but its responsibilities could be separated further.
 
 **Comments:** The comments in `processFindForm()` explain the different search cases and therefore provide useful documentation rather than unnecessary comments.
 
@@ -135,6 +134,5 @@ However, `loadPetWithVisit()` performs several coordination tasks: loading the o
 
 **Duplicated Code:** The owner lookup and owner-not-found exception handling is very similar to the implementation in `OwnerController` and `PetController`.
 
-**Mild Feature Envy concern:** `loadPetWithVisit()` navigates through an Owner to obtain a Pet and then modifies the Pet by adding a Visit. This is not a severe Feature Envy case because controller coordination is normal in MVC applications, but if this behavior became more complex it would be better placed in a dedicated service/domain operation.
 
 **Comments:** The comments explaining Spring MVC's method invocation order are useful framework documentation and should not be classified as a Comments smell.
