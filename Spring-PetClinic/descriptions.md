@@ -1,41 +1,146 @@
 # Spring PetClinic - File Descriptions
 
+This document describes the selected Spring PetClinic source files and analyzes them using relevant SOLID principles and the specified code-smell categories.
+
+---
+
 ## 1. Owner.java
 
-This file defines the Owner domain entity in the PetClinic application. It stores information about pet owners and their relationships with pets. It represents an important part of the application's domain model.
+### Overview
+
+`Owner.java` defines the Owner domain entity used by the PetClinic application. It stores owner information such as address, city, and telephone number and maintains the relationship between an owner and their pets. It also provides operations for finding pets and adding visits.
+
+### SOLID Analysis
+
+The class generally follows the **Single Responsibility Principle (SRP)** because it represents an owner and manages behavior directly related to the owner-pet relationship. Its inheritance from `Person` and its use as a domain entity are also consistent with the application's domain model.
+
 
 ## 2. OwnerController.java
 
-This file implements the web controller responsible for handling requests related to pet owners. It connects the user interface with the application's owner-related functionality and follows the controller responsibility in the MVC architecture.
+### Overview
+
+`OwnerController.java` handles web requests related to owners. It manages owner creation, searching, updating, displaying owner information, and pagination. Persistence operations are delegated to `OwnerRepository`.
+
+### SOLID Analysis
+
+The class generally follows **SRP** because it is responsible for handling owner-related web requests. It also supports **Dependency Inversion Principle (DIP)** by depending on the `OwnerRepository` abstraction instead of directly implementing database operations.
+
+### Code Smell Analysis
+
+**Duplicated Code:** Owner lookup and owner-not-found handling are repeated in other controllers, particularly `PetController` and `VisitController`. The same `findById()` and exception-handling pattern appears in multiple places.
+
+**Mild Long Method concern:** `processFindForm()` performs several tasks in one method: normalizing the search input, performing the search, handling zero results, handling one result, and preparing the response for multiple results. It is not an extreme Long Method, but its responsibilities could be separated further.
+
+**Comments:** The comments in `processFindForm()` explain the different search cases and therefore provide useful documentation rather than unnecessary comments.
 
 ## 3. OwnerRepository.java
 
-This file provides the repository abstraction for accessing and managing Owner data. It separates data-access responsibilities from the controller and domain layers.
+### Overview
+
+`OwnerRepository.java` provides the persistence abstraction for Owner objects. It extends Spring Data JPA's `JpaRepository` and defines a custom query method for finding owners by the beginning of their last name.
+
+### SOLID Analysis
+
+The interface supports **DIP** by providing an abstraction between the application and the persistence implementation. It also follows **SRP** because its responsibility is focused on Owner data access.
 
 ## 4. Pet.java
 
-This file defines the Pet domain entity. It represents an individual pet registered with the clinic and maintains information associated with that pet, including its relationship with an owner.
+### Overview
+
+`Pet.java` defines the Pet domain entity. It stores the pet's birth date and type and maintains the relationship between a pet and its visits.
+
+### SOLID Analysis
+
+The class follows **SRP** by representing a pet and maintaining behavior directly associated with the pet, such as adding visits.
+
+Its relationship with `NamedEntity` is part of the domain model and provides common entity functionality.
 
 ## 5. PetClinicApplication.java
 
-This file is the main entry point of the Spring Boot application. It starts the PetClinic application and provides the configuration required to launch the Spring application.
+### Overview
+
+`PetClinicApplication.java` is the main entry point of the Spring Boot application. Its `main()` method starts the PetClinic application using `SpringApplication.run()`.
+
+### SOLID Analysis
+
+This class is a strong example of **SRP** because its responsibility is limited to application startup.
+
 
 ## 6. PetController.java
 
-This file contains controller logic for handling web requests related to pets. It manages pet-related interactions between the application's user interface and the domain layer.
+### Overview
+
+`PetController.java` handles web requests related to pets. It loads owners and pets, prepares pet types, handles pet creation and updating, performs validation, and saves changes through `OwnerRepository`.
+
+### SOLID Analysis
+
+The controller generally follows **SRP** at the architectural level because it handles pet-related web requests. It also supports **DIP** by using repository abstractions for persistence.
+
+### Code Smell Analysis
+
+**Duplicated Code:** The owner lookup and owner-not-found exception handling in `findOwner()` and `findPet()` repeat the same logic used in `OwnerController` and `VisitController`.
+
+There is also repeated pet validation logic between `processCreationForm()` and `processUpdateForm()`. Both methods check whether the pet's birth date is in the future and both contain duplicate-name validation logic.
+
+**Long Method:** `processCreationForm()` and `processUpdateForm()` combine validation, error handling, persistence, exception handling, and redirection. They are moderate examples of methods that could be simplified through extraction.
+
 
 ## 7. PetType.java
 
-This file represents the type or category of a pet in the PetClinic domain model. It provides a reusable domain object for identifying different pet types.
+### Overview
+
+`PetType.java` represents the type or category of a pet, such as a cat, dog, or hamster. It is a persistent entity that inherits common functionality from `NamedEntity`.
+
+### SOLID Analysis
+
+The class follows **SRP** because its responsibility is to represent the PetType domain entity.
+
 
 ## 8. VetController.java
 
-This file implements the web controller for veterinarian-related functionality. It handles requests associated with displaying and managing veterinarian information.
+### Overview
+
+`VetController.java` handles requests for displaying veterinarian information. It provides paginated veterinarian results and a JSON-compatible veterinarian list.
+
+### SOLID Analysis
+
+The class follows **SRP** because its responsibility is focused on veterinarian-related web requests.
+
+It also supports **DIP** because persistence is delegated to `VetRepository` rather than implemented directly in the controller.
+
+The pagination operations are already separated into `findPaginated()` and `addPaginationModel()`, which keeps the controller methods relatively focused.
+
 
 ## 9. Visit.java
 
-This file defines the Visit domain entity. It represents a visit made by a pet to the clinic and stores information related to that visit.
+### Overview
+
+`Visit.java` defines the Visit domain entity. It stores a visit date and description and initializes a new visit with a default date of tomorrow.
+
+### SOLID Analysis
+
+The class follows **SRP** because it represents the state and behavior of a clinic visit.
 
 ## 10. VisitController.java
 
-This file handles web requests associated with pet visits. It connects the presentation layer with the functionality required to create or manage visit information.
+### Overview
+
+`VisitController.java` handles the creation of new visits for pets. It loads the owner and pet, creates a visit, validates the visit date, and saves the owner.
+
+### SOLID Analysis
+
+The controller generally follows **SRP** by handling web requests related to visits and supports **DIP** by using `OwnerRepository` for persistence.
+
+However, `loadPetWithVisit()` performs several coordination tasks: loading the owner, finding the pet, placing objects into the model, creating the Visit, and adding the Visit to the Pet. This creates a mild SRP concern because some domain coordination could potentially be moved to a service.
+
+### Code Smell Analysis
+
+**Duplicated Code:** The owner lookup and owner-not-found exception handling is very similar to the implementation in `OwnerController` and `PetController`.
+
+**Mild Feature Envy concern:** `loadPetWithVisit()` navigates through an Owner to obtain a Pet and then modifies the Pet by adding a Visit. This is not a severe Feature Envy case because controller coordination is normal in MVC applications, but if this behavior became more complex it would be better placed in a dedicated service/domain operation.
+
+**Comments:** The comments explaining Spring MVC's method invocation order are useful framework documentation and should not be classified as a Comments smell.
+
+
+
+No significant **Inappropriate Naming, Dead Code, Large Class, Lazy Class, Long Parameter List, Speculativ Solution, Alternative Claswith Different Interface, or Switch Statements** smell was identified in these selected Spring PetClinic files.
