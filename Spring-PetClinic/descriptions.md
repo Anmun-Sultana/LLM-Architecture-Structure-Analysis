@@ -1,8 +1,6 @@
 # Spring PetClinic - File Descriptions
 
-This document describes the selected Spring PetClinic source files and analyzes them using relevant SOLID principles and the specified code-smell categories.
 
----
 
 ## 1. Owner.java
 
@@ -140,7 +138,3 @@ However, `loadPetWithVisit()` performs several coordination tasks: loading the o
 **Mild Feature Envy concern:** `loadPetWithVisit()` navigates through an Owner to obtain a Pet and then modifies the Pet by adding a Visit. This is not a severe Feature Envy case because controller coordination is normal in MVC applications, but if this behavior became more complex it would be better placed in a dedicated service/domain operation.
 
 **Comments:** The comments explaining Spring MVC's method invocation order are useful framework documentation and should not be classified as a Comments smell.
-
-
-
-No significant **Inappropriate Naming, Dead Code, Large Class, Lazy Class, Long Parameter List, Speculativ Solution, Alternative Claswith Different Interface, or Switch Statements** smell was identified in these selected Spring PetClinic files.
