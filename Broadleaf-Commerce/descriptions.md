@@ -1,8 +1,5 @@
 # Broadleaf Commerce - File Descriptions
 
-This document describes the selected Broadleaf Commerce source files and analyzes them using relevant SOLID principles and the specified code-smell categories.
-
----
 
 ## 1. AdminCatalogService.java
 
