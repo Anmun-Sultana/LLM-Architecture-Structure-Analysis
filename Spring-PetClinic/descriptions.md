@@ -26,7 +26,6 @@ The class generally follows **SRP** because it is responsible for handling owner
 ### Code Smell Analysis
 
 
-** Long Method concern:** `processFindForm()` performs several tasks in one method: normalizing the search input, performing the search, handling zero results, handling one result, and preparing the response for multiple results. It is not an extreme Long Method, but its responsibilities could be separated further.
 
 **Comments:** The comments in `processFindForm()` explain the different search cases and therefore provide useful documentation rather than unnecessary comments.
 
