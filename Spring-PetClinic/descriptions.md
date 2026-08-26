@@ -1,4 +1,47 @@
-# Spring PetClinic - File Descriptions
+## Architectural Pattern Analysis
+
+The selected Spring PetClinic files demonstrate two architectural patterns from the given list: **MVC (Model-View-Controller)** and **Layered Architecture**.
+
+### 1. MVC (Model-View-Controller)
+
+Spring PetClinic strongly demonstrates the **MVC architectural pattern** through its Spring MVC controllers and domain model classes.
+
+- **Model:** Classes such as `Owner.java`, `Pet.java`, `PetType.java`, and `Visit.java` represent the application's domain data and relationships.
+- **Controller:** `OwnerController.java`, `PetController.java`, `VetController.java`, and `VisitController.java` handle HTTP requests and coordinate application operations.
+- **View:** The controllers return view names and populate the Spring MVC `Model`, allowing the presentation layer to display the required information.
+
+For example, `OwnerController`, `PetController`, `VetController`, and `VisitController` are responsible for handling web requests, while domain entities such as `Owner`, `Pet`, and `Visit` represent the model. This separation of request handling and domain data is evidence of the MVC pattern.
+
+### 2. Layered Architecture
+
+The selected files also demonstrate a **Layered Architectural Pattern** because responsibilities are separated into different logical layers.
+
+The structure visible from the selected files can be summarized as:
+
+**Presentation/Web Layer**
+- `OwnerController.java`
+- `PetController.java`
+- `VetController.java`
+- `VisitController.java`
+
+**Domain/Model Layer**
+- `Owner.java`
+- `Pet.java`
+- `PetType.java`
+- `Visit.java`
+
+**Data Access Layer**
+- `OwnerRepository.java`
+
+The controllers handle web requests, the domain classes represent application entities and relationships, and the repository provides the persistence abstraction. This separation of responsibilities is consistent with Layered Architecture.
+
+### Architectural Pattern Conclusion
+
+Therefore, based on the selected files, Spring PetClinic can be described as a **Layered Architecture that uses MVC for its web/presentation structure**.
+
+### Patterns Not Clearly Demonstrated
+
+The selected files do not provide sufficient evidence to classify the project as **Pipe and Filter** or **Event-Driven** architecture. Although a web application can operate in a client-server environment, the selected files do not provide enough evidence to use **Client-Server** as a primary architectural pattern.
 
 
 
