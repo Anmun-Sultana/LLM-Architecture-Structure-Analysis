@@ -1,6 +1,37 @@
 # Broadleaf Commerce - File Descriptions
 
 
+## Architectural Pattern Analysis
+
+The selected Broadleaf Commerce files demonstrate the **Layered Architectural Pattern** from the given architectural patterns.
+
+### 1. Layered Architecture
+
+The selected Broadleaf Commerce files demonstrate separation of responsibilities between service abstractions, service implementations, validation components, and persistence-related components.
+
+The structure visible from the selected files can be summarized as:
+
+**Service Abstraction Layer**
+- `AdminCatalogService.java`
+
+**Service/Business Logic Layer**
+- `AdminCatalogServiceImpl.java`
+
+**Validation/Component Layer**
+- `OfferQualifyingCriteriaValidator.java`
+
+**Module/Framework Registration**
+- `AdminModuleRegistration.java`
+
+`AdminCatalogService.java` defines the service abstraction, while `AdminCatalogServiceImpl.java` provides the implementation of catalog-related operations. The implementation interacts with other application and persistence components rather than placing all responsibilities in a single layer. `OfferQualifyingCriteriaValidator.java` provides a separate validation responsibility, further demonstrating separation of concerns.
+
+### Architectural Pattern Conclusion
+
+Therefore, based on the selected files, Broadleaf Commerce demonstrates a **Layered Architectural Pattern**, particularly through its separation of service interfaces, service implementations, validation components, and persistence-related responsibilities.
+
+### Patterns Not Clearly Demonstrated
+
+The selected four files do not provide sufficient evidence to classify Broadleaf Commerce as **MVC, Client-Server, Pipe and Filter, or Event-Driven** architecture. These patterns may exist elsewhere in the complete Broadleaf Commerce project, but they are not sufficiently demonstrated by the selected files used in this analysis.
 ## 1. AdminCatalogService.java
 
 ### Overview
