@@ -1,4 +1,7 @@
-###Spring PetClinic - File Descriptions and Analysis
+#Spring PetClinic - File Descriptions and Analysis
+
+
+
 ## Architectural Pattern Analysis
 
 The selected Spring PetClinic files demonstrate two architectural patterns from the given list: **MVC (Model-View-Controller)** and **Layered Architecture**.
