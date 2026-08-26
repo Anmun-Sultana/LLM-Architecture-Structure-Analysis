@@ -35,13 +35,7 @@ The structure visible from the selected files can be summarized as:
 
 The controllers handle web requests, the domain classes represent application entities and relationships, and the repository provides the persistence abstraction. This separation of responsibilities is consistent with Layered Architecture.
 
-### Architectural Pattern Conclusion
 
-Therefore, based on the selected files, Spring PetClinic can be described as a **Layered Architecture that uses MVC for its web/presentation structure**.
-
-### Patterns Not Clearly Demonstrated
-
-The selected files do not provide sufficient evidence to classify the project as **Pipe and Filter** or **Event-Driven** architecture. Although a web application can operate in a client-server environment, the selected files do not provide enough evidence to use **Client-Server** as a primary architectural pattern.
 
 
 
