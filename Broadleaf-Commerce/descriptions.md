@@ -67,29 +67,15 @@ These responsibilities could potentially be separated into smaller services or h
 
 The class contains approximately 299 lines of implementation code and handles several different areas of catalog functionality. This makes it a strong **Large Class** candidate.
 
-**2. Long Method**
 
-`generateSkusFromProduct()` and especially `generateSkus()` contain many sequential operations:
 
-* finding the product
-* checking product options
-* generating permutations
-* identifying existing permutations
-* calculating permutations to generate
-* checking inconsistent permutations
-* invoking the extension manager
-* processing the result
-* returning the response
-
-These methods could be simplified by extracting individual operations into separate methods or services.
-
-**3. Duplicated Code**
+**2. Duplicated Code**
 
 `generateSkusFromProduct()` and `generateSkus()` contain substantial duplicated processing. Both methods retrieve a product, generate permutations, collect previously generated permutations, calculate permutations to generate, check inconsistent permutations, call the extension manager, and process the generated count.
 
 The newer `generateSkus()` method adds response-map handling, but much of the underlying SKU-generation algorithm is repeated.
 
-**4. Dead Code / Unreachable Branch**
+**3. Dead Code / Unreachable Branch**
 
 `generatePermutations()` first checks:
 
